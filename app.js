@@ -1,7 +1,22 @@
-const express = require('express');
+const express = require('express')
+
 const app = express();
-require('./config/database');
 
-app.use('/api', require('./routes/index'));
+require('./connection/db')
 
-app.listen(process.env.PORT, () => console.log('listening at port'))  
+const path = require('path')
+
+require('dotenv').config()
+
+const routes = require('./routes/route')
+
+app.use('/',routes)
+const port = process.env.PORT || 3000
+
+
+// const name = xlsx.utils.sheet_to_json(data.Sheets[sheet_name], { header: ['Name',,'Marks']})
+
+
+app.listen(port, () => {
+    console.log(`shuru ho gaya ${port} pe`)
+})
